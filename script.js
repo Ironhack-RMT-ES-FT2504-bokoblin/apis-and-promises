@@ -112,11 +112,57 @@ function pedirUnLibro(idLibro) {
 //   console.log(error)
 // })
 
-Promise.allSettled( [
-  pedirUnLibro(8),
-  pedirUnLibro(2),
-  pedirUnLibro(3),
-] )
-.then((response) => {
-  console.log(response)
-})
+//* Promise.allSettled() => las resuelve de forma independiente. me da las que sea fulfilled aunque alguna falle.
+// Promise.allSettled( [
+//   pedirUnLibro(7),
+//   pedirUnLibro(2),
+//   pedirUnLibro(3),
+// ] )
+// .then((response) => {
+//   // console.log(response)
+//   response.forEach((cadaRespuesta) => {
+//     if (cadaRespuesta.status === "fulfilled") {
+//       console.log(cadaRespuesta.value)
+//     } else {
+//       console.log(cadaRespuesta.reason)
+//     }
+//   })
+// })
+
+//* async/await & try/catch
+
+async function recibirData() {
+
+  try {
+
+    const response = await pedirUnLibro(1)
+    // con await, JS "espera" que se resuelve la promesa antes de avanzar con la siguiente linea
+    console.log(response)
+  
+    const response2 = await pedirUnLibro(6)
+    console.log(response2)
+  
+    const response3 = await pedirUnLibro(3)
+    console.log(response3)
+  
+    // const allResponses = await Promise.all([
+    //   pedirUnLibro(1), pedirUnLibro(2), pedirUnLibro(3)
+    // ])
+    // console.log(allResponses)
+
+  } catch(error) {
+
+    console.log(error)
+
+  }
+
+}
+
+//! que no se nos olvide invocarla
+recibirData()
+
+//! IMPORTANTE sobre async await
+// - No olvidar la palabra async para la funcion
+// - No olvidar la palabra await para cada resolución de promesa
+// - No olvidar invocar la funcion
+// - No olvidar el try/catch

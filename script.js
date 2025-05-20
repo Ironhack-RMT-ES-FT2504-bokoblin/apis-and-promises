@@ -78,56 +78,56 @@ function pedirUnLibro(idLibro) {
 // })
 
 //* Encadenamiento de promesas
-// pedirUnLibro(1)
-// .then((response) => {
-//   console.log(response)
-//   return pedirUnLibro(2) // espero a recibir el primero antes de pedir el segundo
-// })
-// .then((response) => {
-//   console.log(response)
-//   return pedirUnLibro(3)
-// })
-// .then((response) => {
-//   console.log(response)
-// })
-// .catch((error) => {
-//   // si cualquiera de las promesas encadenadas falla, la llamada entra aqui
-//   console.log(error)
-// })
+pedirUnLibro(1)
+.then((response) => {
+  console.log(response)
+  return pedirUnLibro(2) // espero a recibir el primero antes de pedir el segundo
+})
+.then((response) => {
+  console.log(response)
+  return pedirUnLibro(3)
+})
+.then((response) => {
+  console.log(response)
+})
+.catch((error) => {
+  // si cualquiera de las promesas encadenadas falla, la llamada entra aqui
+  console.log(error)
+})
 
 //* Promise.all() y Promise.allSettled()
 // si el orden de las promesas no importa.
 
 //* Promise.all() => falla todo si al menos una promesa falla
 // recibe un array de multiples promesas
-// Promise.all( [
-//   pedirUnLibro(8),
-//   pedirUnLibro(2),
-//   pedirUnLibro(3),
-// ] )
-// .then((response) => {
-//   console.log(response)
-// })
-// .catch((error) => {
-//   console.log(error)
-// })
+Promise.all( [
+  pedirUnLibro(8),
+  pedirUnLibro(2),
+  pedirUnLibro(3),
+] )
+.then((response) => {
+  console.log(response)
+})
+.catch((error) => {
+  console.log(error)
+})
 
 //* Promise.allSettled() => las resuelve de forma independiente. me da las que sea fulfilled aunque alguna falle.
-// Promise.allSettled( [
-//   pedirUnLibro(7),
-//   pedirUnLibro(2),
-//   pedirUnLibro(3),
-// ] )
-// .then((response) => {
-//   // console.log(response)
-//   response.forEach((cadaRespuesta) => {
-//     if (cadaRespuesta.status === "fulfilled") {
-//       console.log(cadaRespuesta.value)
-//     } else {
-//       console.log(cadaRespuesta.reason)
-//     }
-//   })
-// })
+Promise.allSettled( [
+  pedirUnLibro(7),
+  pedirUnLibro(2),
+  pedirUnLibro(3),
+] )
+.then((response) => {
+  // console.log(response)
+  response.forEach((cadaRespuesta) => {
+    if (cadaRespuesta.status === "fulfilled") {
+      console.log(cadaRespuesta.value)
+    } else {
+      console.log(cadaRespuesta.reason)
+    }
+  })
+})
 
 //* async/await & try/catch
 
